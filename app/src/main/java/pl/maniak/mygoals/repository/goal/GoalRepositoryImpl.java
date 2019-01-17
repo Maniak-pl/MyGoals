@@ -1,4 +1,4 @@
-package pl.maniak.mygoals.repository.goals;
+package pl.maniak.mygoals.repository.goal;
 
 import android.util.Log;
 

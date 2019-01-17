@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import butterknife.ButterKnife;
+import pl.maniak.mygoals.App;
+import pl.maniak.mygoals.utils.di.AppComponent;
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseContract.Router, BaseContract.View {
 
@@ -33,4 +35,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseCont
     }
 
     protected abstract void clear();
+
+    protected AppComponent getAppComponent() {
+        try {
+            return ((App)getApplication()).getAppComponent();
+        } catch (ClassCastException e) {
+            throw new ClassCastException("Application has to extends " + App.class.getSimpleName());
+        }
+    }
 }
