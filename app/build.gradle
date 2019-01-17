@@ -35,4 +35,7 @@ dependencies {
     //Lombok
     implementation "org.projectlombok:lombok:1.16.10"
     annotationProcessor "org.projectlombok:lombok:1.16.10"
+
+    //ORMLite
+    implementation 'com.j256.ormlite:ormlite-android:4.48'
 }
