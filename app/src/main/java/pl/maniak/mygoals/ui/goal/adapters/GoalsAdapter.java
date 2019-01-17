@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -18,6 +17,8 @@ import lombok.Setter;
 import pl.maniak.mygoals.R;
 import pl.maniak.mygoals.model.Goal;
 import pl.maniak.mygoals.utils.helpers.DateHelper;
+import pl.maniak.mygoals.utils.views.GoalProgress;
+
 
 @RequiredArgsConstructor
 public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHolder> {
@@ -59,11 +60,8 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHold
         @BindView(R.id.createDate)
         TextView date;
 
-        @BindView(R.id.progressState)
-        TextView progressStep;
-
-        @BindView(R.id.goalProgressBar)
-        ProgressBar progressBar;
+        @BindView(R.id.goalProgress)
+        GoalProgress progressBar;
 
         @Setter
         private Goal goal;
@@ -77,18 +75,14 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHold
             this.goal = goal;
             title.setText(goal.getTitle());
             date.setText(DateHelper.parseDateToString(goal.getDate()));
-            progressStep.setText(getProgressStep(goal));
-            progressBar.setMax(goal.getMaxStep());
-            progressBar.setProgress(goal.getCurrentStep());
-        }
 
-        private String getProgressStep(Goal goal) {
-            return goal.getCurrentStep() + " / " + goal.getMaxStep();
+            progressBar.setProgressColor(goal.getColor());
+            progressBar.setProgress(goal.getCurrentStep(), goal.getMaxStep());
         }
 
         @OnClick(R.id.goalAddButton)
         public void addButtonClicked() {
-            goal.setCurrentStep(goal.getCurrentStep()+1);
+            goal.setCurrentStep(goal.getCurrentStep() + 1);
             notifyDataSetChanged();
         }
 

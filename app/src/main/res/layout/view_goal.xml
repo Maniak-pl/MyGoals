@@ -2,7 +2,8 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_height="100dp"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <include layout="@layout/guideline" />
 
@@ -11,64 +12,54 @@
         android:layout_width="@dimen/empty"
         android:layout_height="@dimen/empty"
         android:gravity="center_vertical"
-        android:text="eTutor"
-        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_50"
+        tools:text="eTutor sdflsdjflasjdfl   dksflasdfj l adflkjsalfj lksdjflsdsflaj lkdsfj  dlksf"
+        android:ellipsize="end"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_30"
         app:layout_constraintLeft_toRightOf="@id/guideline_vertical_05"
         app:layout_constraintRight_toLeftOf="@id/goalAddButton"
         app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_10" />
+
+
+    <TextView
+        android:id="@+id/createDate"
+        android:layout_width="@dimen/empty"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:gravity="center_vertical"
+        tools:text="13.01.2019"
+        android:textSize="8dp"
+        app:layout_constraintTop_toBottomOf="@id/goalTitle"
+        app:layout_constraintLeft_toRightOf="@id/guideline_vertical_05" />
 
     <ImageView
         android:id="@+id/goalAddButton"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/empty"
-        android:src="@drawable/ic_add"
         android:layout_margin="5dp"
+        android:src="@drawable/ic_add"
         app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_50"
         app:layout_constraintRight_toLeftOf="@id/goalSettingsButton"
-        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_10" />
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_05" />
 
 
     <ImageView
         android:id="@+id/goalSettingsButton"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/empty"
-        android:src="@drawable/ic_settings"
         android:layout_margin="5dp"
+        android:src="@drawable/ic_settings"
         app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_50"
         app:layout_constraintRight_toLeftOf="@id/guideline_vertical_95"
-        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_10" />
-    
-    <ProgressBar
-        android:id="@+id/goalProgressBar"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_05" />
+
+    <pl.maniak.mygoals.utils.views.GoalProgress
+        android:id="@+id/goalProgress"
         android:layout_width="@dimen/empty"
         android:layout_height="@dimen/empty"
-        style="@style/MyProgressBarTwo"
-        android:theme="@style/MyProgressBarTwo"
-        app:layout_constraintLeft_toRightOf="@id/guideline_vertical_05"
         app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_95"
+        app:layout_constraintLeft_toRightOf="@id/guideline_vertical_05"
         app:layout_constraintRight_toLeftOf="@id/guideline_vertical_95"
-        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_50"
-        android:indeterminateTint="@android:color/holo_red_dark"/>
-
-    <TextView
-        android:id="@+id/createDate"
-        android:layout_width="@dimen/empty"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:textSize="8dp"
-        android:text="13.01.2019"
-        android:layout_marginRight="10dp"
-        app:layout_constraintRight_toLeftOf="@id/progressState"
-        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_95" />
-
-    <TextView
-        android:id="@+id/progressState"
-        android:layout_width="@dimen/empty"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:textSize="8dp"
-        android:text="20/25"
-        app:layout_constraintLeft_toRightOf="@id/guideline_vertical_90"
-        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_95" />
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_50" />
 
 </android.support.constraint.ConstraintLayout>

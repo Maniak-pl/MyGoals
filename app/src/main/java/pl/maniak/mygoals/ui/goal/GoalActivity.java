@@ -16,6 +16,7 @@ import java.util.List;
 import butterknife.BindView;
 import pl.maniak.mygoals.R;
 import pl.maniak.mygoals.model.Goal;
+import pl.maniak.mygoals.model.ProgressColor;
 import pl.maniak.mygoals.ui.BaseActivity;
 import pl.maniak.mygoals.ui.goal.adapters.GoalsAdapter;
 
@@ -40,9 +41,9 @@ public class GoalActivity extends BaseActivity {
         });
 
         List<Goal> list = new ArrayList<>();
-        list.add(new Goal("eTutor - Lesson", new Date(), 50, 22));
-        list.add(new Goal("Book", new Date(), 20, 2));
-        list.add(new Goal("Notebooks with English", new Date(), 20, 1));
+        list.add(new Goal("eTutor - Lesson", new Date(), 50, 22, ProgressColor.blue));
+        list.add(new Goal("Book", new Date(), 20, 2, ProgressColor.red));
+        list.add(new Goal("Notebooks with English", new Date(), 20, 1, ProgressColor.yellow));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new GoalsAdapter(list));

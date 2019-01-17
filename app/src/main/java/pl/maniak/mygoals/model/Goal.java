@@ -15,4 +15,5 @@ public class Goal {
     private int maxStep;
     @Setter
     private int currentStep;
+    private ProgressColor color;
 }
