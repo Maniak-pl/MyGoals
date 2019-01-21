@@ -13,6 +13,8 @@ import pl.maniak.mygoals.repository.DBHelper;
 import pl.maniak.mygoals.repository.goal.GoalRepository;
 import pl.maniak.mygoals.repository.goal.GoalRepositoryImpl;
 import pl.maniak.mygoals.ui.goal.GoalActivity;
+import pl.maniak.mygoals.ui.goal.GoalContract;
+import pl.maniak.mygoals.ui.goal.GoalPresenter;
 import pl.maniak.mygoals.ui.goal.adapters.GoalsAdapter;
 
 @Module
@@ -38,5 +40,10 @@ public class GoalModule {
     @Provides
     LinearLayoutManager provideLinearLayoutManager() {
         return new LinearLayoutManager(activity);
+    }
+
+    @Provides
+    GoalContract.Presenter provideGoalPresenter(GoalRepository repository) {
+        return new GoalPresenter(repository);
     }
 }

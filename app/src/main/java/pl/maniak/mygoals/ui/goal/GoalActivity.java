@@ -4,9 +4,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -20,13 +20,15 @@ import pl.maniak.mygoals.ui.goal.dialogs.GoalDialog;
 import pl.maniak.mygoals.utils.di.goal.DaggerGoalComponent;
 import pl.maniak.mygoals.utils.di.goal.GoalModule;
 
-public class GoalActivity extends BaseActivity {
+public class GoalActivity extends BaseActivity implements GoalContract.View, GoalContract.Router {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
     @Inject
     GoalRepository repository;
+
+    @Inject GoalContract.Presenter presenter;
 
     @Inject
     GoalsAdapter adapter;
@@ -37,6 +39,9 @@ public class GoalActivity extends BaseActivity {
     @Override
     protected void init() {
 
+        presenter.attachView(this);
+        presenter.attachRouter(this);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -44,7 +49,7 @@ public class GoalActivity extends BaseActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showGoalDialog(null);
+                presenter.onAddButtonClicked();
             }
         });
 
@@ -59,7 +64,7 @@ public class GoalActivity extends BaseActivity {
         adapter.setListener(new GoalsAdapter.OnItemLongClickListener() {
             @Override
             public void onItemLongClicked(Goal goal) {
-                showGoalDialog(goal);
+                presenter.onItemLongClicked(goal);
             }
         });
         recyclerView.setAdapter(adapter);
@@ -82,46 +87,28 @@ public class GoalActivity extends BaseActivity {
 
     @Override
     protected void clear() {
-
+        presenter.detachView();
+        presenter.detachRouter();
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    public void refreshList(List<Goal> goals) {
+        adapter.updateData(goals);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void refreshList() {
-        adapter.updateData(repository.getAllGoals());
-    }
-
     public void showGoalDialog(Goal goal) {
         GoalDialog dialog = GoalDialog.newInstance(goal);
         dialog.setSaveListener(new GoalDialog.OnSaveGoalClickedListener() {
             @Override
             public void onSaveGoalClicked(Goal goal) {
-                repository.saveGoal(goal);
-                refreshList();
+                presenter.onSaveDialogButtonClicked(goal);
             }
         });
         dialog.setDeleteListener(new GoalDialog.OnDeleteGoalClickedListener() {
             @Override
             public void onDeleteGoalClicked(Goal goal) {
-                repository.deleteGoalById(goal.getId());
-                refreshList();
+               presenter.onDeleteDialogButtonClicked(goal);
             }
         });
         dialog.show(getSupportFragmentManager(), "Goal Tag");

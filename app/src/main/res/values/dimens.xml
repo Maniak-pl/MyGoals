@@ -2,4 +2,6 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="empty">0dp</dimen>
+
+    <dimen name="goal_progressbar_height">15dp</dimen>
 </resources>

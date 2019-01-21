@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -68,6 +69,9 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHold
         @BindView(R.id.goalProgress)
         GoalProgress progressBar;
 
+        @BindView(R.id.goalAddButton)
+        ImageView button;
+
         @Setter
         OnItemLongClickListener listener;
 
@@ -86,6 +90,12 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHold
 
             progressBar.setProgressColor(goal.getColor());
             progressBar.setProgress(goal.getCurrentStep(), goal.getMaxStep());
+
+            if(goal.getCurrentStep()>=goal.getMaxStep()) {
+                button.setVisibility(View.GONE);
+            } else {
+                button.setVisibility(View.VISIBLE);
+            }
         }
 
         @OnClick(R.id.goalAddButton)

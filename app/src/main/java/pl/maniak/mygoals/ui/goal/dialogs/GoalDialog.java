@@ -97,9 +97,14 @@ public class GoalDialog extends DialogFragment {
 
     @OnClick(R.id.dialogGoalSaveButton)
     public void onButtonClicked() {
-        Goal goal = new Goal(title.getText().toString(), new Date(), Integer.parseInt(currentProgress.getText().toString()), Integer.parseInt(maxProgress.getText().toString()), (ProgressColor) spinner.getSelectedItem());
+
+        defaultGoal.setTitle(title.getText().toString());
+        defaultGoal.setCurrentStep(Integer.parseInt(currentProgress.getText().toString()));
+        defaultGoal.setMaxStep(Integer.parseInt(maxProgress.getText().toString()));
+        defaultGoal.setColor((ProgressColor) spinner.getSelectedItem());
+
         if (saveListener != null) {
-            saveListener.onSaveGoalClicked(goal);
+            saveListener.onSaveGoalClicked(defaultGoal);
         }
         dismiss();
     }
