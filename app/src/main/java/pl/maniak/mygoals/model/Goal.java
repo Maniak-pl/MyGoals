@@ -29,7 +29,7 @@ public class Goal {
 
     public Goal() { }
 
-    public Goal(String title, Date date, int maxStep, int currentStep, ProgressColor color) {
+    public Goal(String title, Date date, int currentStep, int maxStep, ProgressColor color) {
         Title = title;
         this.date = date;
         this.maxStep = maxStep;

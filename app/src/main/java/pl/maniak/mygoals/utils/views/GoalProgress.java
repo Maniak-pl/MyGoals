@@ -46,7 +46,7 @@ public class GoalProgress extends RelativeLayout {
     public void setProgressColor(ProgressColor color) {
         Resources res = getContext().getResources();
         Rect bounds = progressBar.getProgressDrawable().getBounds();
-        progressBar.setProgressDrawable(res.getDrawable(getDrawableRes(color)));
+        progressBar.setProgressDrawable(res.getDrawable(getDrawableRes(color), null));
         progressBar.getProgressDrawable().setBounds(bounds);
     }
 

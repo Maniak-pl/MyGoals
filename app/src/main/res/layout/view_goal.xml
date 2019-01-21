@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/goalLayout"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     xmlns:tools="http://schemas.android.com/tools">
@@ -38,17 +39,6 @@
         android:layout_height="@dimen/empty"
         android:layout_margin="5dp"
         android:src="@drawable/ic_add"
-        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_50"
-        app:layout_constraintRight_toLeftOf="@id/goalSettingsButton"
-        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_05" />
-
-
-    <ImageView
-        android:id="@+id/goalSettingsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/empty"
-        android:layout_margin="5dp"
-        android:src="@drawable/ic_settings"
         app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_50"
         app:layout_constraintRight_toLeftOf="@id/guideline_vertical_95"
         app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_05" />

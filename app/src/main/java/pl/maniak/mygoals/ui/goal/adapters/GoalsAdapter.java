@@ -12,6 +12,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnLongClick;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import pl.maniak.mygoals.R;
@@ -24,6 +25,9 @@ import pl.maniak.mygoals.utils.views.GoalProgress;
 public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHolder> {
 
     private final List<Goal> list;
+
+    @Setter
+    OnItemLongClickListener listener;
 
     @NonNull
     @Override
@@ -39,6 +43,7 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHold
     public void onBindViewHolder(@NonNull GoalViewHolder holder, int position) {
         Goal goal = list.get(position);
         holder.setItem(goal);
+        holder.listener = listener;
     }
 
     @Override
@@ -64,6 +69,9 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHold
         GoalProgress progressBar;
 
         @Setter
+        OnItemLongClickListener listener;
+
+        @Setter
         private Goal goal;
 
         public GoalViewHolder(@NonNull View itemView) {
@@ -86,5 +94,16 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHold
             notifyDataSetChanged();
         }
 
+        @OnLongClick(R.id.goalLayout)
+        public boolean longClicked() {
+            if (listener != null) {
+                listener.onItemLongClicked(goal);
+            }
+            return true;
+        }
+    }
+
+    public interface OnItemLongClickListener {
+        void onItemLongClicked(Goal goal);
     }
 }

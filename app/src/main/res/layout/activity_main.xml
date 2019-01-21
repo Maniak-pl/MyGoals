@@ -39,6 +39,6 @@
         android:layout_margin="@dimen/fab_margin"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        app:srcCompat="@drawable/ic_add" />
+        app:srcCompat="@android:drawable/ic_dialog_dialer" />
 
 </RelativeLayout>

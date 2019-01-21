@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/dialogGoalTitleLable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Title"/>
+
+    <EditText
+        android:id="@+id/dialogGoalTitle"
+        android:layout_below="@id/dialogGoalTitleLable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/dialogGoalProgressLabel"
+        android:layout_below="@id/dialogGoalTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="@dimen/empty"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Current Setp"/>
+
+        <TextView
+            android:layout_width="@dimen/empty"
+            android:layout_weight="1"
+            android:text="Max Step"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@id/dialogGoalProgressLabel"
+        android:id="@+id/dialogGoalProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/dialogGoalCurrentProgress"
+            android:layout_below="@id/dialogGoalTitle"
+            android:layout_width="@dimen/empty"
+            android:layout_weight="1"
+            android:inputType="numberDecimal"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/dialogGoalMaxProgress"
+            android:layout_below="@id/dialogGoalCurrentProgress"
+            android:layout_width="@dimen/empty"
+            android:layout_weight="1"
+            android:inputType="numberDecimal"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <Spinner
+        android:layout_below="@id/dialogGoalProgress"
+        android:id="@+id/dialogGoalColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+    </Spinner>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialogGoalColor"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/dialogGoalSaveButton"
+            android:layout_width="@dimen/empty"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_save"
+/>
+
+        <ImageButton
+            android:id="@+id/dialogGoalDeleteButton"
+            android:layout_width="@dimen/empty"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_delete"/>
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>
