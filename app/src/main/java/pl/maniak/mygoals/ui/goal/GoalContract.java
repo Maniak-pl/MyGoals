@@ -21,6 +21,7 @@ public interface GoalContract {
         void onSaveDialogButtonClicked(Goal goal);
         void onDeleteDialogButtonClicked(Goal goal);
         void onItemLongClicked(Goal goal);
+        void onAddProgressButtonClicked(Goal goal);
         void onAddButtonClicked();
     }
 }

@@ -28,7 +28,10 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHold
     private final List<Goal> list;
 
     @Setter
-    OnItemLongClickListener listener;
+    OnItemLongClickListener longClickListener;
+
+    @Setter
+    OnAddProgressClickListener addProgressListener;
 
     @NonNull
     @Override
@@ -44,7 +47,8 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHold
     public void onBindViewHolder(@NonNull GoalViewHolder holder, int position) {
         Goal goal = list.get(position);
         holder.setItem(goal);
-        holder.listener = listener;
+        holder.longClickListener = longClickListener;
+        holder.addProgressListener = addProgressListener;
     }
 
     @Override
@@ -73,7 +77,10 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHold
         ImageView button;
 
         @Setter
-        OnItemLongClickListener listener;
+        OnItemLongClickListener longClickListener;
+
+        @Setter
+        OnAddProgressClickListener addProgressListener;
 
         @Setter
         private Goal goal;
@@ -100,17 +107,23 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHold
 
         @OnClick(R.id.goalAddButton)
         public void addButtonClicked() {
-            goal.setCurrentStep(goal.getCurrentStep() + 1);
-            notifyDataSetChanged();
+            goal.addProgress();
+            if(addProgressListener != null) {
+                addProgressListener.onAddProgressClicked(goal);
+            }
         }
 
         @OnLongClick(R.id.goalLayout)
         public boolean longClicked() {
-            if (listener != null) {
-                listener.onItemLongClicked(goal);
+            if (longClickListener != null) {
+                longClickListener.onItemLongClicked(goal);
             }
             return true;
         }
+    }
+
+    public interface OnAddProgressClickListener {
+        void onAddProgressClicked(Goal goal);
     }
 
     public interface OnItemLongClickListener {

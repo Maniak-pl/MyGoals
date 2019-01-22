@@ -61,10 +61,16 @@ public class GoalActivity extends BaseActivity implements GoalContract.View, Goa
     private void initRecyclerView() {
         recyclerView.setLayoutManager(layoutManager);
         adapter.updateData(repository.getAllGoals());
-        adapter.setListener(new GoalsAdapter.OnItemLongClickListener() {
+        adapter.setLongClickListener(new GoalsAdapter.OnItemLongClickListener() {
             @Override
             public void onItemLongClicked(Goal goal) {
                 presenter.onItemLongClicked(goal);
+            }
+        });
+        adapter.setAddProgressListener(new GoalsAdapter.OnAddProgressClickListener() {
+            @Override
+            public void onAddProgressClicked(Goal goal) {
+                presenter.onAddProgressButtonClicked(goal);
             }
         });
         recyclerView.setAdapter(adapter);

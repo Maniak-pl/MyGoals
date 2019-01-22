@@ -36,4 +36,8 @@ public class Goal {
         this.currentStep = currentStep;
         this.color = color;
     }
+
+    public void addProgress() {
+        currentStep++;
+    }
 }

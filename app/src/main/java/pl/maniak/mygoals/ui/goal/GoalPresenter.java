@@ -53,6 +53,12 @@ public class GoalPresenter implements GoalContract.Presenter {
     }
 
     @Override
+    public void onAddProgressButtonClicked(Goal goal) {
+        repository.saveGoal(goal);
+        refreshList();
+    }
+
+    @Override
     public void onAddButtonClicked() {
         showDialog(null);
     }
