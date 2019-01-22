@@ -6,7 +6,7 @@
                 android:angle="270" />
             <stroke
                 android:width="2dp"
-                android:color="@color/black" />
+                android:color="@color/gray" />
             <corners
                 android:radius="@dimen/goal_progressbar_radius" />
             <padding

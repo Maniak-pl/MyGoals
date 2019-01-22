@@ -1,8 +1,6 @@
 package pl.maniak.mygoals.utils.views;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,21 +31,18 @@ public class GoalProgress extends RelativeLayout {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.view_goal_progress, this, true);
 
-        progressLabel = (TextView)view.findViewById(R.id.goalProgressLabel);
-        progressBar = (ProgressBar)view.findViewById(R.id.goalProgressBar);
+        progressLabel = (TextView) view.findViewById(R.id.goalProgressLabel);
+        progressBar = (ProgressBar) view.findViewById(R.id.goalProgressBar);
     }
 
     public void setProgress(int current, int max) {
         progressLabel.setText(current + " / " + max);
-        progressBar.setProgress(current);
         progressBar.setMax(max);
+        progressBar.setProgress(current);
     }
 
     public void setProgressColor(ProgressColor color) {
-        Resources res = getContext().getResources();
-        Rect bounds = progressBar.getProgressDrawable().getBounds();
-        progressBar.setProgressDrawable(res.getDrawable(getDrawableRes(color), null));
-        progressBar.getProgressDrawable().setBounds(bounds);
+        progressBar.setProgressDrawable(getContext().getResources().getDrawable(getDrawableRes(color), null));
     }
 
     private int getDrawableRes(ProgressColor color) {

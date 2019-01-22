@@ -5,7 +5,6 @@ import com.j256.ormlite.table.DatabaseTable;
 
 import java.util.Date;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,7 +26,8 @@ public class Goal {
     @DatabaseField
     private ProgressColor color;
 
-    public Goal() { }
+    public Goal() {
+    }
 
     public Goal(String title, Date date, int currentStep, int maxStep, ProgressColor color) {
         Title = title;
