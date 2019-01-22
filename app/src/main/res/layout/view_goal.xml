@@ -8,6 +8,15 @@
 
     <include layout="@layout/guideline" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/goal_view_bg" />
+
     <TextView
         android:id="@+id/goalTitle"
         android:layout_width="@dimen/empty"
@@ -16,6 +25,7 @@
         tools:text="eTutor sdflsdjflasjdfl   dksflasdfj l adflkjsalfj lksdjflsdsflaj lkdsfj  dlksf"
         android:ellipsize="end"
         android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_30"
         app:layout_constraintLeft_toRightOf="@id/guideline_vertical_05"
         app:layout_constraintRight_toLeftOf="@id/goalAddButton"

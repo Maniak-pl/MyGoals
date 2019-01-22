@@ -3,7 +3,7 @@
     <item android:id="@android:id/background"
         android:gravity="center_vertical|fill_horizontal">
         <shape android:shape="rectangle">
-            <corners android:radius="10dp"/>
+            <corners android:radius="@dimen/goal_progressbar_radius"/>
             <size android:height="@dimen/goal_progressbar_height" />
             <solid android:color="@color/light_grey" />
         </shape>
@@ -13,7 +13,7 @@
         <scale android:scaleWidth="100%">
             <shape android:shape="rectangle"
                 android:tint="?attr/colorControlActivated">
-                <corners android:radius="10dp"/>
+                <corners android:radius="@dimen/goal_progressbar_radius"/>
                 <size android:height="@dimen/goal_progressbar_height" />
                 <solid android:color="@color/yellow" />
             </shape>

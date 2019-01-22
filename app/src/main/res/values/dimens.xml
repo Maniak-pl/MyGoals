@@ -4,4 +4,5 @@
     <dimen name="empty">0dp</dimen>
 
     <dimen name="goal_progressbar_height">15dp</dimen>
+    <dimen name="goal_progressbar_radius">5dp</dimen>
 </resources>
