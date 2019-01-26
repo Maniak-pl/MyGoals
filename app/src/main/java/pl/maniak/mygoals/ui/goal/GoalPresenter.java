@@ -50,6 +50,7 @@ public class GoalPresenter implements GoalContract.Presenter {
     @Override
     public void onItemLongClicked(Goal goal) {
         showDialog(goal);
+//        navigationToEditGoal(goal.getId());
     }
 
     @Override
@@ -62,6 +63,11 @@ public class GoalPresenter implements GoalContract.Presenter {
     public void onAddButtonClicked() {
         showDialog(null);
 //        navigationToEditGoal(null);
+    }
+
+    @Override
+    public void onResumed() {
+        refreshList();
     }
 
     private void refreshList() {

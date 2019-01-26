@@ -14,10 +14,18 @@ public class EditGoalPresenter implements EditGoalContract.Presenter {
     EditGoalContract.Router router;
 
     private final GoalRepository repository;
+    private static Goal goal = initDefaultGoal();
 
     @Override
     public void onResumed(Long goalId) {
         setData(goalId);
+    }
+
+    @Override
+    public void onSaveButtonClicked(String title) {
+        goal.setTitle(title);
+        repository.saveGoal(goal);
+        navigateBack();
     }
 
     @Override
@@ -42,7 +50,14 @@ public class EditGoalPresenter implements EditGoalContract.Presenter {
 
     private void setData(Long id) {
         if (view != null) {
-            view.setData(id != null ? repository.getGoalById(id) : initDefaultGoal());
+            goal = id != 0 ? repository.getGoalById(id) : initDefaultGoal();
+            view.setData(goal);
+        }
+    }
+
+    private void navigateBack() {
+        if (router != null) {
+            router.navigateBack();
         }
     }
 

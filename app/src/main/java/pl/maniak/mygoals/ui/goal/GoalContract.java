@@ -23,5 +23,6 @@ public interface GoalContract {
         void onItemLongClicked(Goal goal);
         void onAddProgressButtonClicked(Goal goal);
         void onAddButtonClicked();
+        void onResumed();
     }
 }

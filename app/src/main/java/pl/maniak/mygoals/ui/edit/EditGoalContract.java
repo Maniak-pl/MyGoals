@@ -11,9 +11,12 @@ public interface EditGoalContract {
 
     interface Router extends BaseContract.Router {
 
+        void navigateBack();
     }
 
     interface Presenter extends BaseContract.Presenter<View, Router> {
         void onResumed(Long goalId);
+
+        void onSaveButtonClicked(String title);
     }
 }

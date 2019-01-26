@@ -19,6 +19,7 @@ import pl.maniak.mygoals.ui.BaseActivity;
 import pl.maniak.mygoals.ui.edit.EditGoalActivity;
 import pl.maniak.mygoals.ui.goal.adapters.GoalsAdapter;
 import pl.maniak.mygoals.ui.goal.dialogs.GoalDialog;
+import pl.maniak.mygoals.utils.Constants;
 import pl.maniak.mygoals.utils.di.goal.DaggerGoalComponent;
 import pl.maniak.mygoals.utils.di.goal.GoalModule;
 
@@ -56,13 +57,10 @@ public class GoalActivity extends BaseActivity implements GoalContract.View, Goa
         });
 
         initRecyclerView();
-
-
     }
 
     private void initRecyclerView() {
         recyclerView.setLayoutManager(layoutManager);
-        adapter.updateData(repository.getAllGoals());
         adapter.setLongClickListener(new GoalsAdapter.OnItemLongClickListener() {
             @Override
             public void onItemLongClicked(Goal goal) {
@@ -76,7 +74,12 @@ public class GoalActivity extends BaseActivity implements GoalContract.View, Goa
             }
         });
         recyclerView.setAdapter(adapter);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.onResumed();
     }
 
     @Override
@@ -124,6 +127,8 @@ public class GoalActivity extends BaseActivity implements GoalContract.View, Goa
 
     @Override
     public void navigationToEditGoal(Long goalId) {
-        startActivity(new Intent(this, EditGoalActivity.class));
+        Intent intent = new Intent(this, EditGoalActivity.class);
+        intent.putExtra(Constants.INTENT_GOAL_ID, goalId);
+        startActivity(intent);
     }
 }
