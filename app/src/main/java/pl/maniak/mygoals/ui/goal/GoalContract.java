@@ -13,7 +13,7 @@ public interface GoalContract {
     }
 
     interface Router extends BaseContract.Router {
-
+        void navigationToEditGoal(Long goalId);
     }
 
     interface Presenter extends BaseContract.Presenter<View, Router> {

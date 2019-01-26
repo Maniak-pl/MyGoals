@@ -1,5 +1,6 @@
 package pl.maniak.mygoals.ui.goal;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,7 @@ import pl.maniak.mygoals.R;
 import pl.maniak.mygoals.model.Goal;
 import pl.maniak.mygoals.repository.goal.GoalRepository;
 import pl.maniak.mygoals.ui.BaseActivity;
+import pl.maniak.mygoals.ui.edit.EditGoalActivity;
 import pl.maniak.mygoals.ui.goal.adapters.GoalsAdapter;
 import pl.maniak.mygoals.ui.goal.dialogs.GoalDialog;
 import pl.maniak.mygoals.utils.di.goal.DaggerGoalComponent;
@@ -118,5 +120,10 @@ public class GoalActivity extends BaseActivity implements GoalContract.View, Goa
             }
         });
         dialog.show(getSupportFragmentManager(), "Goal Tag");
+    }
+
+    @Override
+    public void navigationToEditGoal(Long goalId) {
+        startActivity(new Intent(this, EditGoalActivity.class));
     }
 }

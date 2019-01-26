@@ -61,6 +61,7 @@ public class GoalPresenter implements GoalContract.Presenter {
     @Override
     public void onAddButtonClicked() {
         showDialog(null);
+//        navigationToEditGoal(null);
     }
 
     private void refreshList() {
@@ -72,6 +73,12 @@ public class GoalPresenter implements GoalContract.Presenter {
     private void showDialog(Goal goal) {
         if(view != null) {
             view.showGoalDialog(goal);
+        }
+    }
+
+    private void navigationToEditGoal(Long goalId) {
+        if(router!=null) {
+            router.navigationToEditGoal(goalId);
         }
     }
 }
