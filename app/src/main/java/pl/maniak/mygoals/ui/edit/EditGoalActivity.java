@@ -1,7 +1,6 @@
 package pl.maniak.mygoals.ui.edit;
 
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import javax.inject.Inject;
 
@@ -13,11 +12,29 @@ import pl.maniak.mygoals.ui.BaseActivity;
 import pl.maniak.mygoals.utils.Constants;
 import pl.maniak.mygoals.utils.di.edit.DaggerEditGoalComponent;
 import pl.maniak.mygoals.utils.di.edit.EditGoalModule;
+import pl.maniak.mygoals.utils.helpers.DateHelper;
+import pl.maniak.mygoals.utils.views.GoalEditText;
+import pl.maniak.mygoals.utils.views.GoalProgress;
 
 public class EditGoalActivity extends BaseActivity implements EditGoalContract.View, EditGoalContract.Router {
 
-    @BindView(R.id.editgoal_label)
-    EditText titleEt;
+    @BindView(R.id.editGoalLabel)
+    GoalEditText title;
+
+    @BindView(R.id.editGoalCurrentStep)
+    GoalEditText currentStep;
+
+    @BindView(R.id.editGoalMaxStep)
+    GoalEditText maxStep;
+
+    @BindView(R.id.goalTitle)
+    TextView tmpTitle;
+
+    @BindView(R.id.createDate)
+    TextView tmpDate;
+
+    @BindView(R.id.goalProgress)
+    GoalProgress tmpProgressBar;
 
     @Inject
     EditGoalContract.Presenter presenter;
@@ -26,6 +43,27 @@ public class EditGoalActivity extends BaseActivity implements EditGoalContract.V
     protected void init() {
         presenter.attachView(this);
         presenter.attachRouter(this);
+
+        title.setListener(new GoalEditText.OnTextChangeListener() {
+            @Override
+            public void onTextChanged(String str) {
+                presenter.onTitleTextChanged(str);
+            }
+        });
+
+        currentStep.setListener(new GoalEditText.OnTextChangeListener() {
+            @Override
+            public void onTextChanged(String str) {
+                presenter.onCurrentStepTextChanged(str);
+            }
+        });
+
+        maxStep.setListener(new GoalEditText.OnTextChangeListener() {
+            @Override
+            public void onTextChanged(String str) {
+                presenter.onMaxStepTextChanged(str);
+            }
+        });
     }
 
     @Override
@@ -56,13 +94,24 @@ public class EditGoalActivity extends BaseActivity implements EditGoalContract.V
     }
 
     @Override
-    public void setData(Goal goal) {
-        titleEt.setText(goal.getTitle());
+    public void fillLayout(Goal goal) {
+        title.setText(goal.getTitle());
+        currentStep.setText(String.valueOf(goal.getCurrentStep()));
+        maxStep.setText(String.valueOf(goal.getMaxStep()));
+    }
+
+    @Override
+    public void refreshTemplate(Goal goal) {
+        tmpTitle.setText(goal.getTitle());
+        tmpDate.setText(DateHelper.parseDateToString(goal.getDate()));
+
+        tmpProgressBar.setProgressColor(goal.getColor());
+        tmpProgressBar.setProgress(goal.getCurrentStep(), goal.getMaxStep());
     }
 
     @OnClick(R.id.editgoalSaveBtn)
     public void OnSaveButtonClick() {
-        presenter.onSaveButtonClicked(titleEt.getText().toString());
+        presenter.onSaveButtonClicked();
     }
 
     @Override

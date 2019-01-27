@@ -18,14 +18,31 @@ public class EditGoalPresenter implements EditGoalContract.Presenter {
 
     @Override
     public void onResumed(Long goalId) {
-        setData(goalId);
+        fillLayout(goalId);
     }
 
     @Override
-    public void onSaveButtonClicked(String title) {
-        goal.setTitle(title);
+    public void onSaveButtonClicked() {
         repository.saveGoal(goal);
         navigateBack();
+    }
+
+    @Override
+    public void onTitleTextChanged(String title) {
+        goal.setTitle(title);
+        refreshTemplate();
+    }
+
+    @Override
+    public void onCurrentStepTextChanged(String currentStep) {
+        goal.setCurrentStep(!currentStep.isEmpty() ? Integer.parseInt(currentStep) : 0);
+        refreshTemplate();
+    }
+
+    @Override
+    public void onMaxStepTextChanged(String maxStep) {
+        goal.setMaxStep(!maxStep.isEmpty() ? Integer.parseInt(maxStep) : 0);
+        refreshTemplate();
     }
 
     @Override
@@ -48,16 +65,23 @@ public class EditGoalPresenter implements EditGoalContract.Presenter {
         view = null;
     }
 
-    private void setData(Long id) {
+    private void fillLayout(Long id) {
         if (view != null) {
             goal = id != 0 ? repository.getGoalById(id) : initDefaultGoal();
-            view.setData(goal);
+            view.fillLayout(goal);
+            view.refreshTemplate(goal);
         }
     }
 
     private void navigateBack() {
         if (router != null) {
             router.navigateBack();
+        }
+    }
+
+    private void refreshTemplate() {
+        if (view != null) {
+            view.refreshTemplate(goal);
         }
     }
 

@@ -1,7 +1,5 @@
 package pl.maniak.mygoals.ui.goal;
 
-import android.util.Log;
-
 import lombok.RequiredArgsConstructor;
 import pl.maniak.mygoals.model.Goal;
 import pl.maniak.mygoals.repository.goal.GoalRepository;
@@ -49,8 +47,8 @@ public class GoalPresenter implements GoalContract.Presenter {
 
     @Override
     public void onItemLongClicked(Goal goal) {
-        showDialog(goal);
-//        navigationToEditGoal(goal.getId());
+//        showDialog(goal);
+        navigationToEditGoal(goal.getId());
     }
 
     @Override
