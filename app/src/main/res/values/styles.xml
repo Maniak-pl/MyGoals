@@ -52,4 +52,9 @@
         <item name="android:progressDrawable">@drawable/goal_progressbar_red</item>
         <item name="android:minWidth">200dp</item>
     </style>
+
+    <style name="ColorSpinner">
+        <item name="android:dropDownSelector">@android:color/transparent</item>
+        <item name="android:spinnerMode">dropdown</item>
+    </style>
 </resources>

@@ -1,5 +1,8 @@
 package pl.maniak.mygoals.ui.edit;
 
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import javax.inject.Inject;
@@ -8,7 +11,9 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import pl.maniak.mygoals.R;
 import pl.maniak.mygoals.model.Goal;
+import pl.maniak.mygoals.model.ProgressColor;
 import pl.maniak.mygoals.ui.BaseActivity;
+import pl.maniak.mygoals.ui.edit.adapters.EnumAdapter;
 import pl.maniak.mygoals.utils.Constants;
 import pl.maniak.mygoals.utils.di.edit.DaggerEditGoalComponent;
 import pl.maniak.mygoals.utils.di.edit.EditGoalModule;
@@ -27,6 +32,9 @@ public class EditGoalActivity extends BaseActivity implements EditGoalContract.V
     @BindView(R.id.editGoalMaxStep)
     GoalEditText maxStep;
 
+    @BindView(R.id.editgoalSpinner)
+    Spinner spinner;
+
     @BindView(R.id.goalTitle)
     TextView tmpTitle;
 
@@ -38,6 +46,9 @@ public class EditGoalActivity extends BaseActivity implements EditGoalContract.V
 
     @Inject
     EditGoalContract.Presenter presenter;
+
+    @Inject
+    EnumAdapter spinnerAdapter;
 
     @Override
     protected void init() {
@@ -62,6 +73,25 @@ public class EditGoalActivity extends BaseActivity implements EditGoalContract.V
             @Override
             public void onTextChanged(String str) {
                 presenter.onMaxStepTextChanged(str);
+            }
+        });
+
+        initSpinner();
+    }
+
+    private void initSpinner() {
+        spinner.setAdapter(spinnerAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                ProgressColor color = (ProgressColor) adapterView
+                        .getItemAtPosition(position);
+                presenter.onColorChanged(color);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
     }
@@ -98,6 +128,7 @@ public class EditGoalActivity extends BaseActivity implements EditGoalContract.V
         title.setText(goal.getTitle());
         currentStep.setText(String.valueOf(goal.getCurrentStep()));
         maxStep.setText(String.valueOf(goal.getMaxStep()));
+        spinner.setSelection(goal.getColor().ordinal());
     }
 
     @Override

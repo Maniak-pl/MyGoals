@@ -1,6 +1,7 @@
 package pl.maniak.mygoals.ui.edit;
 
 import pl.maniak.mygoals.model.Goal;
+import pl.maniak.mygoals.model.ProgressColor;
 import pl.maniak.mygoals.ui.BaseContract;
 
 public interface EditGoalContract {
@@ -21,5 +22,6 @@ public interface EditGoalContract {
         void onTitleTextChanged(String title);
         void onCurrentStepTextChanged(String currentStep);
         void onMaxStepTextChanged(String maxStep);
+        void onColorChanged(ProgressColor color);
     }
 }

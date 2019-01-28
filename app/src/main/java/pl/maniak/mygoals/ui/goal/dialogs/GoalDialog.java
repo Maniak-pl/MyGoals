@@ -41,7 +41,7 @@ public class GoalDialog extends DialogFragment {
 
     @NonNull
     private static Goal initDefaultGoal() {
-        return new Goal("Task", new Date(), 0, 10, ProgressColor.green);
+        return new Goal("Task", new Date(), 0, 10, ProgressColor.GREEN);
     }
 
     @Setter

@@ -47,15 +47,15 @@ public class GoalProgress extends RelativeLayout {
 
     private int getDrawableRes(ProgressColor color) {
         switch (color) {
-            case red:
+            case RED:
                 return R.drawable.goal_progressbar_red;
-            case green:
+            case GREEN:
                 return R.drawable.goal_progressbar_green;
-            case orange:
+            case ORANGE:
                 return R.drawable.goal_progressbar_orange;
-            case blue:
+            case BLUE:
                 return R.drawable.goal_progressbar_blue;
-            case yellow:
+            case YELLOW:
                 return R.drawable.goal_progressbar_yellow;
             default:
                 return R.drawable.goal_progressbar_blue;

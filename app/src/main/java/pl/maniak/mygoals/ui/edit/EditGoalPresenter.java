@@ -46,6 +46,12 @@ public class EditGoalPresenter implements EditGoalContract.Presenter {
     }
 
     @Override
+    public void onColorChanged(ProgressColor color) {
+        goal.setColor(color);
+        refreshTemplate();
+    }
+
+    @Override
     public void attachView(EditGoalContract.View view) {
         this.view = view;
     }
@@ -86,6 +92,6 @@ public class EditGoalPresenter implements EditGoalContract.Presenter {
     }
 
     private static Goal initDefaultGoal() {
-        return new Goal("Task", new Date(), 0, 10, ProgressColor.green);
+        return new Goal("Task", new Date(), 0, 10, ProgressColor.GREEN);
     }
 }
