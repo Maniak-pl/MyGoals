@@ -29,7 +29,7 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHold
     private final List<Goal> list;
 
     @Setter
-    OnItemLongClickListener longClickListener;
+    OnItemClickListener clickListener;
 
     @Setter
     OnAddProgressClickListener addProgressListener;
@@ -48,7 +48,7 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHold
     public void onBindViewHolder(@NonNull GoalViewHolder holder, int position) {
         Goal goal = list.get(position);
         holder.setItem(goal);
-        holder.longClickListener = longClickListener;
+        holder.clickListener = clickListener;
         holder.addProgressListener = addProgressListener;
     }
 
@@ -78,7 +78,7 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHold
         ImageView button;
 
         @Setter
-        OnItemLongClickListener longClickListener;
+        OnItemClickListener clickListener;
 
         @Setter
         OnAddProgressClickListener addProgressListener;
@@ -114,12 +114,11 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHold
             }
         }
 
-        @OnLongClick(R.id.goalLayout)
-        public boolean longClicked() {
-            if (longClickListener != null) {
-                longClickListener.onItemLongClicked(goal);
+        @OnClick(R.id.goalLayout)
+        public void longClicked() {
+            if (clickListener != null) {
+                clickListener.onItemClicked(goal);
             }
-            return true;
         }
     }
 
@@ -127,7 +126,7 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHold
         void onAddProgressClicked(Goal goal);
     }
 
-    public interface OnItemLongClickListener {
-        void onItemLongClicked(Goal goal);
+    public interface OnItemClickListener {
+        void onItemClicked(Goal goal);
     }
 }

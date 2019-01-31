@@ -52,6 +52,12 @@ public class EditGoalPresenter implements EditGoalContract.Presenter {
     }
 
     @Override
+    public void onDeleteButtonClicked() {
+        repository.deleteGoalById(goal.getId());
+        navigateBack();
+    }
+
+    @Override
     public void attachView(EditGoalContract.View view) {
         this.view = view;
     }
@@ -76,6 +82,7 @@ public class EditGoalPresenter implements EditGoalContract.Presenter {
             goal = id != 0 ? repository.getGoalById(id) : initDefaultGoal();
             view.fillLayout(goal);
             view.refreshTemplate(goal);
+            view.changeTextButton(id == null ? true : false);
         }
     }
 

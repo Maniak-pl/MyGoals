@@ -9,7 +9,6 @@ public interface GoalContract {
 
     interface View extends BaseContract.View {
         void refreshList(List<Goal> goals);
-        void showGoalDialog(Goal goal);
     }
 
     interface Router extends BaseContract.Router {
@@ -18,8 +17,6 @@ public interface GoalContract {
 
     interface Presenter extends BaseContract.Presenter<View, Router> {
 
-        void onSaveDialogButtonClicked(Goal goal);
-        void onDeleteDialogButtonClicked(Goal goal);
         void onItemLongClicked(Goal goal);
         void onAddProgressButtonClicked(Goal goal);
         void onAddButtonClicked();

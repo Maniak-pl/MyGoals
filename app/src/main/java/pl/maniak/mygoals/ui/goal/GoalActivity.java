@@ -14,11 +14,9 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import pl.maniak.mygoals.R;
 import pl.maniak.mygoals.model.Goal;
-import pl.maniak.mygoals.repository.goal.GoalRepository;
 import pl.maniak.mygoals.ui.BaseActivity;
 import pl.maniak.mygoals.ui.edit.EditGoalActivity;
 import pl.maniak.mygoals.ui.goal.adapters.GoalsAdapter;
-import pl.maniak.mygoals.ui.goal.dialogs.GoalDialog;
 import pl.maniak.mygoals.utils.Constants;
 import pl.maniak.mygoals.utils.di.goal.DaggerGoalComponent;
 import pl.maniak.mygoals.utils.di.goal.GoalModule;
@@ -27,9 +25,6 @@ public class GoalActivity extends BaseActivity implements GoalContract.View, Goa
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-
-    @Inject
-    GoalRepository repository;
 
     @Inject GoalContract.Presenter presenter;
 
@@ -61,9 +56,9 @@ public class GoalActivity extends BaseActivity implements GoalContract.View, Goa
 
     private void initRecyclerView() {
         recyclerView.setLayoutManager(layoutManager);
-        adapter.setLongClickListener(new GoalsAdapter.OnItemLongClickListener() {
+        adapter.setClickListener(new GoalsAdapter.OnItemClickListener() {
             @Override
-            public void onItemLongClicked(Goal goal) {
+            public void onItemClicked(Goal goal) {
                 presenter.onItemLongClicked(goal);
             }
         });
@@ -105,24 +100,6 @@ public class GoalActivity extends BaseActivity implements GoalContract.View, Goa
     @Override
     public void refreshList(List<Goal> goals) {
         adapter.updateData(goals);
-    }
-
-    @Override
-    public void showGoalDialog(Goal goal) {
-        GoalDialog dialog = GoalDialog.newInstance(goal);
-        dialog.setSaveListener(new GoalDialog.OnSaveGoalClickedListener() {
-            @Override
-            public void onSaveGoalClicked(Goal goal) {
-                presenter.onSaveDialogButtonClicked(goal);
-            }
-        });
-        dialog.setDeleteListener(new GoalDialog.OnDeleteGoalClickedListener() {
-            @Override
-            public void onDeleteGoalClicked(Goal goal) {
-               presenter.onDeleteDialogButtonClicked(goal);
-            }
-        });
-        dialog.show(getSupportFragmentManager(), "Goal Tag");
     }
 
     @Override

@@ -2,6 +2,7 @@ package pl.maniak.mygoals.ui.edit;
 
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -43,6 +44,12 @@ public class EditGoalActivity extends BaseActivity implements EditGoalContract.V
 
     @BindView(R.id.goalProgress)
     GoalProgress tmpProgressBar;
+
+    @BindView(R.id.editgoalSaveBtn)
+    Button saveBtn;
+
+    @BindView(R.id.editgoalDeleteBtn)
+    Button deleteBtn;
 
     @Inject
     EditGoalContract.Presenter presenter;
@@ -140,9 +147,25 @@ public class EditGoalActivity extends BaseActivity implements EditGoalContract.V
         tmpProgressBar.setProgress(goal.getCurrentStep(), goal.getMaxStep());
     }
 
+    @Override
+    public void changeTextButton(boolean isCreated) {
+        if(isCreated) {
+            saveBtn.setText(R.string.create);
+            deleteBtn.setText(R.string.cancel);
+        } else {
+            saveBtn.setText(R.string.save);
+            deleteBtn.setText(R.string.delete);
+        }
+    }
+
     @OnClick(R.id.editgoalSaveBtn)
     public void OnSaveButtonClick() {
         presenter.onSaveButtonClicked();
+    }
+
+    @OnClick(R.id.editgoalDeleteBtn)
+    public void OnDeleteButtonClick() {
+        presenter.onDeleteButtonClicked();
     }
 
     @Override

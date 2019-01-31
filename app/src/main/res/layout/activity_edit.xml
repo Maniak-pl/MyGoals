@@ -1,47 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/layout_bg"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/layout_bg">
 
-    <include
+    <android.support.v7.widget.CardView
         android:id="@+id/include"
-        layout="@layout/view_goal"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_margin="10dp"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="4dp"
         app:layout_constraintBottom_toTopOf="@id/editGoalLabel"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.05"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed">
+
+        <include layout="@layout/view_goal" />
+
+    </android.support.v7.widget.CardView>
+
 
     <pl.maniak.mygoals.utils.views.GoalEditText
         android:id="@+id/editGoalLabel"
         android:layout_width="@dimen/empty"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="16dp"
         android:inputType="textAutoComplete"
         android:maxLength="255"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@id/editGoalCurrentStep"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/include"/>
+        app:layout_constraintTop_toBottomOf="@id/include" />
 
     <pl.maniak.mygoals.utils.views.GoalEditText
         android:id="@+id/editGoalCurrentStep"
         android:layout_width="@dimen/empty"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
         android:digits="1234567890"
         android:inputType="numberDecimal"
         android:maxLength="3"
@@ -49,16 +55,16 @@
         app:layout_constraintBottom_toTopOf="@id/editgoalSpinner"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/editGoalMaxStep"
-        app:layout_constraintTop_toBottomOf="@id/editGoalLabel"/>
+        app:layout_constraintTop_toBottomOf="@id/editGoalLabel" />
 
     <pl.maniak.mygoals.utils.views.GoalEditText
         android:id="@+id/editGoalMaxStep"
         android:layout_width="@dimen/empty"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
         android:digits="1234567890"
         android:inputType="numberDecimal"
         android:maxLength="3"
@@ -66,35 +72,48 @@
         app:layout_constraintBottom_toBottomOf="@id/editGoalCurrentStep"
         app:layout_constraintLeft_toRightOf="@id/editGoalCurrentStep"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/editGoalCurrentStep"
-        />
+        app:layout_constraintTop_toTopOf="@id/editGoalCurrentStep" />
 
     <Spinner
         android:id="@+id/editgoalSpinner"
         android:layout_width="@dimen/empty"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/bg_spinner"
-        app:layout_constraintTop_toBottomOf="@id/editGoalCurrentStep"
+        app:layout_constraintBottom_toTopOf="@id/editGoalCurrentStep"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="@id/editGoalCurrentStep"
-        app:layout_constraintBottom_toTopOf="@id/editGoalCurrentStep" />
+        app:layout_constraintTop_toBottomOf="@id/editGoalCurrentStep" />
 
     <Button
         android:id="@+id/editgoalSaveBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/editgoalDeleteBtn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editgoalSpinner"/>
+        app:layout_constraintTop_toBottomOf="@id/editgoalSpinner" />
+
+    <Button
+        android:id="@+id/editgoalDeleteBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/editgoalSaveBtn"
+        app:layout_constraintTop_toBottomOf="@id/editgoalSpinner" />
 
 
 </android.support.constraint.ConstraintLayout>

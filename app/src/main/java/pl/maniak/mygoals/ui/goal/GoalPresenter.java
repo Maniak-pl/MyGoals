@@ -32,22 +32,8 @@ public class GoalPresenter implements GoalContract.Presenter {
         view = null;
     }
 
-
-    @Override
-    public void onSaveDialogButtonClicked(Goal goal) {
-        repository.saveGoal(goal);
-        refreshList();
-    }
-
-    @Override
-    public void onDeleteDialogButtonClicked(Goal goal) {
-        repository.deleteGoalById(goal.getId());
-        refreshList();
-    }
-
     @Override
     public void onItemLongClicked(Goal goal) {
-//        showDialog(goal);
         navigationToEditGoal(goal.getId());
     }
 
@@ -59,8 +45,7 @@ public class GoalPresenter implements GoalContract.Presenter {
 
     @Override
     public void onAddButtonClicked() {
-        showDialog(null);
-//        navigationToEditGoal(null);
+        navigationToEditGoal(null);
     }
 
     @Override
@@ -71,12 +56,6 @@ public class GoalPresenter implements GoalContract.Presenter {
     private void refreshList() {
         if(view!=null) {
             view.refreshList(repository.getAllGoals());
-        }
-    }
-
-    private void showDialog(Goal goal) {
-        if(view != null) {
-            view.showGoalDialog(goal);
         }
     }
 

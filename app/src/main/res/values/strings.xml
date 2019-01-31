@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">MyGoals</string>
     <string name="action_settings">Settings</string>
+
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="create">Create</string>
+    <string name="cancel">Cancel</string>
 </resources>

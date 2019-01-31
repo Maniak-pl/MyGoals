@@ -9,6 +9,8 @@ public interface EditGoalContract {
     interface View extends BaseContract.View {
         void fillLayout(Goal goal);
         void refreshTemplate(Goal goal);
+
+        void changeTextButton(boolean isCreated);
     }
 
     interface Router extends BaseContract.Router {
@@ -23,5 +25,6 @@ public interface EditGoalContract {
         void onCurrentStepTextChanged(String currentStep);
         void onMaxStepTextChanged(String maxStep);
         void onColorChanged(ProgressColor color);
+        void onDeleteButtonClicked();
     }
 }
