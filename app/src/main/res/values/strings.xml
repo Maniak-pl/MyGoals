@@ -6,4 +6,6 @@
     <string name="delete">Delete</string>
     <string name="create">Create</string>
     <string name="cancel">Cancel</string>
+    <string name="navigationTitleList">Goals</string>
+    <string name="navigationTitleHistory">History</string>
 </resources>

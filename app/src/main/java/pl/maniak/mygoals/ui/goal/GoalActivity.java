@@ -1,38 +1,41 @@
 package pl.maniak.mygoals.ui.goal;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.Fragment;
+import android.view.MenuItem;
 import android.view.View;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import pl.maniak.mygoals.R;
-import pl.maniak.mygoals.model.Goal;
 import pl.maniak.mygoals.ui.BaseActivity;
 import pl.maniak.mygoals.ui.edit.EditGoalActivity;
-import pl.maniak.mygoals.ui.goal.adapters.GoalsAdapter;
+import pl.maniak.mygoals.ui.goal.fragments.HistoryFragment;
+import pl.maniak.mygoals.ui.goal.fragments.ListFragment;
 import pl.maniak.mygoals.utils.Constants;
 import pl.maniak.mygoals.utils.di.goal.DaggerGoalComponent;
 import pl.maniak.mygoals.utils.di.goal.GoalModule;
 
 public class GoalActivity extends BaseActivity implements GoalContract.View, GoalContract.Router {
 
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
+    @BindView(R.id.navigation)
+    BottomNavigationView navigation;
 
-    @Inject GoalContract.Presenter presenter;
-
-    @Inject
-    GoalsAdapter adapter;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
 
     @Inject
-    LinearLayoutManager layoutManager;
+    ListFragment listFragment;
+
+    @Inject
+    HistoryFragment historyFragment;
+
+    @Inject
+    GoalContract.Presenter presenter;
 
     @Override
     protected void init() {
@@ -40,41 +43,30 @@ public class GoalActivity extends BaseActivity implements GoalContract.View, Goa
         presenter.attachView(this);
         presenter.attachRouter(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.onAddButtonClicked();
+                presenter.onMenuButtonClicked();
             }
         });
-
-        initRecyclerView();
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.navigation_goals:
+                        presenter.onListNavigationItemSelected();
+                        return true;
+                    case R.id.navigation_history:
+                        presenter.onHistoryNavigationItemSelected();
+                        return true;
+                }
+                return false;
+            }
+        });
     }
 
-    private void initRecyclerView() {
-        recyclerView.setLayoutManager(layoutManager);
-        adapter.setClickListener(new GoalsAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClicked(Goal goal) {
-                presenter.onItemLongClicked(goal);
-            }
-        });
-        adapter.setAddProgressListener(new GoalsAdapter.OnAddProgressClickListener() {
-            @Override
-            public void onAddProgressClicked(Goal goal) {
-                presenter.onAddProgressButtonClicked(goal);
-            }
-        });
-        recyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        presenter.onResumed();
+    private void replaceFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, fragment).commit();
     }
 
     @Override
@@ -88,7 +80,7 @@ public class GoalActivity extends BaseActivity implements GoalContract.View, Goa
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_main;
+        return R.layout.activity_goal;
     }
 
     @Override
@@ -98,14 +90,19 @@ public class GoalActivity extends BaseActivity implements GoalContract.View, Goa
     }
 
     @Override
-    public void refreshList(List<Goal> goals) {
-        adapter.updateData(goals);
-    }
-
-    @Override
     public void navigationToEditGoal(Long goalId) {
         Intent intent = new Intent(this, EditGoalActivity.class);
         intent.putExtra(Constants.INTENT_GOAL_ID, goalId);
         startActivity(intent);
+    }
+
+    @Override
+    public void showGoalsFragment() {
+        replaceFragment(listFragment);
+    }
+
+    @Override
+    public void showHistoryFragment() {
+        replaceFragment(historyFragment);
     }
 }

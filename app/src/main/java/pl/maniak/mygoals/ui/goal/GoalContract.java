@@ -1,14 +1,12 @@
 package pl.maniak.mygoals.ui.goal;
 
-import java.util.List;
-
-import pl.maniak.mygoals.model.Goal;
 import pl.maniak.mygoals.ui.BaseContract;
 
 public interface GoalContract {
 
     interface View extends BaseContract.View {
-        void refreshList(List<Goal> goals);
+        void showGoalsFragment();
+        void showHistoryFragment();
     }
 
     interface Router extends BaseContract.Router {
@@ -16,10 +14,8 @@ public interface GoalContract {
     }
 
     interface Presenter extends BaseContract.Presenter<View, Router> {
-
-        void onItemLongClicked(Goal goal);
-        void onAddProgressButtonClicked(Goal goal);
-        void onAddButtonClicked();
-        void onResumed();
+        void onMenuButtonClicked();
+        void onListNavigationItemSelected();
+        void onHistoryNavigationItemSelected();
     }
 }

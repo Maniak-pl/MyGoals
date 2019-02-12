@@ -1,21 +1,13 @@
 package pl.maniak.mygoals.utils.di.goal;
 
-import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
-
-import java.util.ArrayList;
-
 import dagger.Module;
 import dagger.Provides;
 import lombok.RequiredArgsConstructor;
-import pl.maniak.mygoals.model.Goal;
-import pl.maniak.mygoals.repository.DBHelper;
-import pl.maniak.mygoals.repository.goal.GoalRepository;
-import pl.maniak.mygoals.repository.goal.GoalRepositoryImpl;
 import pl.maniak.mygoals.ui.goal.GoalActivity;
 import pl.maniak.mygoals.ui.goal.GoalContract;
 import pl.maniak.mygoals.ui.goal.GoalPresenter;
-import pl.maniak.mygoals.ui.goal.adapters.GoalsAdapter;
+import pl.maniak.mygoals.ui.goal.fragments.HistoryFragment;
+import pl.maniak.mygoals.ui.goal.fragments.ListFragment;
 
 @Module
 @RequiredArgsConstructor
@@ -23,27 +15,17 @@ public class GoalModule {
     private final GoalActivity activity;
 
     @Provides
-    Context provideContext() {
-        return activity.getBaseContext();
+    ListFragment provideListFragment() {
+        return ListFragment.newInstance();
     }
 
     @Provides
-    GoalRepository provideGoalRepository(DBHelper helper) {
-        return new GoalRepositoryImpl(helper);
+    HistoryFragment provideHistoryFragment() {
+        return HistoryFragment.newInstance();
     }
 
     @Provides
-    GoalsAdapter provideGoalAdapter() {
-        return new GoalsAdapter(new ArrayList<Goal>());
-    }
-
-    @Provides
-    LinearLayoutManager provideLinearLayoutManager() {
-        return new LinearLayoutManager(activity);
-    }
-
-    @Provides
-    GoalContract.Presenter provideGoalPresenter(GoalRepository repository) {
-        return new GoalPresenter(repository);
+    GoalContract.Presenter provideGoalPresenter() {
+        return new GoalPresenter();
     }
 }

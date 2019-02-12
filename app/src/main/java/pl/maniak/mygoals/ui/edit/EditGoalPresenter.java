@@ -82,7 +82,7 @@ public class EditGoalPresenter implements EditGoalContract.Presenter {
             goal = id != 0 ? repository.getGoalById(id) : initDefaultGoal();
             view.fillLayout(goal);
             view.refreshTemplate(goal);
-            view.changeTextButton(id == null ? true : false);
+            view.changeTextButton(goal.getId() == null ? true : false);
         }
     }
 
