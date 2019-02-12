@@ -12,6 +12,7 @@ import com.j256.ormlite.table.TableUtils;
 import java.sql.SQLException;
 
 import pl.maniak.mygoals.model.Goal;
+import pl.maniak.mygoals.model.History;
 
 public class DBHelper extends OrmLiteSqliteOpenHelper {
 
@@ -19,6 +20,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     private Dao<Goal, Long> goalsDao = null;
+    private Dao<History, Long> historyDao = null;
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -28,6 +30,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         try {
             TableUtils.createTable(connectionSource, Goal.class);
+            TableUtils.createTable(connectionSource, History.class);
         } catch (SQLException e) {
             Log.e("Maniak", "DBHelper.onCreate() ", e);
         }
@@ -37,6 +40,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
             TableUtils.dropTable(connectionSource, Goal.class, true);
+            TableUtils.dropTable(connectionSource, History.class, true);
             onCreate(database, connectionSource);
         } catch (SQLException e) {
             Log.e("Maniak", "DBHelper.onUpgrade() ", e);
@@ -48,5 +52,12 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
             goalsDao = getDao(Goal.class);
         }
         return goalsDao;
+    }
+
+    public Dao<History, Long> getHistoryDao() throws SQLException {
+        if(historyDao == null) {
+            historyDao = getDao(History.class);
+        }
+        return historyDao;
     }
 }

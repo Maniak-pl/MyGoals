@@ -72,7 +72,7 @@ public class ListFragment extends BaseFragment implements ListContract.View, Lis
         adapter.setClickListener(new GoalsAdapter.OnItemClickListener() {
             @Override
             public void onItemClicked(Goal goal) {
-                presenter.onItemLongClicked(goal);
+                presenter.onItemClicked(goal);
             }
         });
         adapter.setAddProgressListener(new GoalsAdapter.OnAddProgressClickListener() {

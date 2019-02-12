@@ -17,7 +17,7 @@ public interface ListContract {
 
     interface Presenter extends BaseContract.Presenter<View, Router> {
 
-        void onItemLongClicked(Goal goal);
+        void onItemClicked(Goal goal);
         void onAddProgressButtonClicked(Goal goal);
         void onResumed();
     }

@@ -9,6 +9,8 @@ import dagger.Provides;
 import lombok.RequiredArgsConstructor;
 import pl.maniak.mygoals.App;
 import pl.maniak.mygoals.repository.DBHelper;
+import pl.maniak.mygoals.repository.history.HistoryRepository;
+import pl.maniak.mygoals.repository.history.HistoryRepositoryImpl;
 
 @Module
 @RequiredArgsConstructor
@@ -26,5 +28,10 @@ public class AppModule {
     @Provides
     public DBHelper getDBHelper() {
         return new DBHelper(app);
+    }
+
+    @Provides
+    public HistoryRepository provideHistoryRepository(DBHelper helper) {
+        return new HistoryRepositoryImpl(helper);
     }
 }

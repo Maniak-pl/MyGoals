@@ -12,6 +12,7 @@ import pl.maniak.mygoals.model.Goal;
 import pl.maniak.mygoals.repository.DBHelper;
 import pl.maniak.mygoals.repository.goal.GoalRepository;
 import pl.maniak.mygoals.repository.goal.GoalRepositoryImpl;
+import pl.maniak.mygoals.repository.history.HistoryRepository;
 import pl.maniak.mygoals.ui.goal.fragments.ListContract;
 import pl.maniak.mygoals.ui.goal.fragments.ListPresenter;
 import pl.maniak.mygoals.ui.goal.adapters.GoalsAdapter;
@@ -44,7 +45,7 @@ public class ListFragmentModule {
     }
 
     @Provides
-    ListContract.Presenter provideGoalPresenter(GoalRepository repository) {
-        return new ListPresenter(repository);
+    ListContract.Presenter provideGoalPresenter(GoalRepository goalRepository, HistoryRepository historyRepository) {
+        return new ListPresenter(goalRepository, historyRepository);
     }
 }
