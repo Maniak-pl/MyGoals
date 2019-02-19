@@ -58,6 +58,12 @@ public class EditGoalPresenter implements EditGoalContract.Presenter {
     }
 
     @Override
+    public void onSwitchChanged(boolean isPercentage) {
+        goal.setPercentageProgress(isPercentage);
+        refreshTemplate();
+    }
+
+    @Override
     public void attachView(EditGoalContract.View view) {
         this.view = view;
     }

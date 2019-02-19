@@ -57,4 +57,8 @@
         <item name="android:dropDownSelector">@android:color/transparent</item>
         <item name="android:spinnerMode">dropdown</item>
     </style>
+
+    <style name="SwitchTheme" parent="Theme.AppCompat.Light">
+        <item name="android:colorControlActivated">@color/green</item>
+    </style>
 </resources>

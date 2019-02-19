@@ -35,10 +35,22 @@ public class GoalProgress extends RelativeLayout {
         progressBar = (ProgressBar) view.findViewById(R.id.goalProgressBar);
     }
 
-    public void setProgress(int current, int max) {
-        progressLabel.setText(current + " / " + max);
+    public void setProgress(int current, int max, boolean percentageProgres) {
         progressBar.setMax(max);
         progressBar.setProgress(current);
+        if(percentageProgres) {
+            progressLabel.setText(calculatePercentage(current, max));
+        } else {
+            progressLabel.setText(current + " / " + max);
+        }
+    }
+
+    private String calculatePercentage(int current, int max) {
+        int percentage = 0;
+        if(max!=0) {
+            percentage = (current*100)/max;
+        }
+        return percentage + "%";
     }
 
     public void setProgressColor(ProgressColor color) {

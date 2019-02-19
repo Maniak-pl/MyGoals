@@ -3,7 +3,9 @@ package pl.maniak.mygoals.ui.edit;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import javax.inject.Inject;
@@ -45,6 +47,9 @@ public class EditGoalActivity extends BaseActivity implements EditGoalContract.V
     @BindView(R.id.goalProgress)
     GoalProgress tmpProgressBar;
 
+    @BindView(R.id.editgoalSwitch)
+    Switch percentageSwitch;
+
     @BindView(R.id.editgoalSaveBtn)
     Button saveBtn;
 
@@ -80,6 +85,13 @@ public class EditGoalActivity extends BaseActivity implements EditGoalContract.V
             @Override
             public void onTextChanged(String str) {
                 presenter.onMaxStepTextChanged(str);
+            }
+        });
+
+        percentageSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                presenter.onSwitchChanged(b);
             }
         });
 
@@ -136,6 +148,7 @@ public class EditGoalActivity extends BaseActivity implements EditGoalContract.V
         currentStep.setText(String.valueOf(goal.getCurrentStep()));
         maxStep.setText(String.valueOf(goal.getMaxStep()));
         spinner.setSelection(goal.getColor().ordinal());
+        percentageSwitch.setChecked(goal.isPercentageProgress());
     }
 
     @Override
@@ -144,12 +157,12 @@ public class EditGoalActivity extends BaseActivity implements EditGoalContract.V
         tmpDate.setText(DateHelper.parseDateToString(goal.getDate()));
 
         tmpProgressBar.setProgressColor(goal.getColor());
-        tmpProgressBar.setProgress(goal.getCurrentStep(), goal.getMaxStep());
+        tmpProgressBar.setProgress(goal.getCurrentStep(), goal.getMaxStep(), goal.isPercentageProgress());
     }
 
     @Override
     public void changeTextButton(boolean isCreated) {
-        if(isCreated) {
+        if (isCreated) {
             saveBtn.setText(R.string.create);
             deleteBtn.setText(R.string.cancel);
         } else {

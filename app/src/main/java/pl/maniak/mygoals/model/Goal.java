@@ -25,6 +25,8 @@ public class Goal {
     private int currentStep;
     @DatabaseField
     private ProgressColor color;
+    @DatabaseField
+    private boolean isPercentageProgress = false;
 
     public Goal() {
     }

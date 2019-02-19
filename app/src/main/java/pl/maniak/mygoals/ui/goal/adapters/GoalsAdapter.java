@@ -97,7 +97,7 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHold
             date.setText(DateHelper.parseDateToString(goal.getDate()));
 
             progressBar.setProgressColor(goal.getColor());
-            progressBar.setProgress(goal.getCurrentStep(), goal.getMaxStep());
+            progressBar.setProgress(goal.getCurrentStep(), goal.getMaxStep(), goal.isPercentageProgress());
 
             if(goal.getCurrentStep()>=goal.getMaxStep()) {
                 button.setVisibility(View.GONE);

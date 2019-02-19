@@ -26,5 +26,6 @@ public interface EditGoalContract {
         void onMaxStepTextChanged(String maxStep);
         void onColorChanged(ProgressColor color);
         void onDeleteButtonClicked();
+        void onSwitchChanged(boolean isPercentage);
     }
 }
