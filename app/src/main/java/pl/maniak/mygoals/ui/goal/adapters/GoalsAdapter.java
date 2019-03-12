@@ -2,7 +2,6 @@ package pl.maniak.mygoals.ui.goal.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnLongClick;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import pl.maniak.mygoals.R;
@@ -29,7 +27,7 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHold
     private final List<Goal> list;
 
     @Setter
-    OnItemClickListener clickListener;
+    OnItemClickListener settingClickListener;
 
     @Setter
     OnAddProgressClickListener addProgressListener;
@@ -48,7 +46,7 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHold
     public void onBindViewHolder(@NonNull GoalViewHolder holder, int position) {
         Goal goal = list.get(position);
         holder.setItem(goal);
-        holder.clickListener = clickListener;
+        holder.settingClickListener = settingClickListener;
         holder.addProgressListener = addProgressListener;
     }
 
@@ -78,7 +76,7 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHold
         ImageView button;
 
         @Setter
-        OnItemClickListener clickListener;
+        OnItemClickListener settingClickListener;
 
         @Setter
         OnAddProgressClickListener addProgressListener;
@@ -114,10 +112,10 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHold
             }
         }
 
-        @OnClick(R.id.goalLayout)
-        public void longClicked() {
-            if (clickListener != null) {
-                clickListener.onItemClicked(goal);
+        @OnClick(R.id.goalSettingButton)
+        public void settingButtonClicked() {
+            if (settingClickListener != null) {
+                settingClickListener.onItemClicked(goal);
             }
         }
     }

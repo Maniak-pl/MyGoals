@@ -5,24 +5,17 @@
     android:layout_height="match_parent"
     android:background="@color/layout_bg">
 
-    <android.support.v7.widget.CardView
+    <include layout="@layout/view_goal"
         android:id="@+id/include"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_margin="10dp"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="10dp"
         app:layout_constraintBottom_toTopOf="@id/editGoalLabel"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.05"
-        app:layout_constraintVertical_chainStyle="packed">
-
-        <include layout="@layout/view_goal" />
-
-    </android.support.v7.widget.CardView>
-
+        app:layout_constraintVertical_chainStyle="packed"/>
 
     <pl.maniak.mygoals.utils.views.GoalEditText
         android:id="@+id/editGoalLabel"

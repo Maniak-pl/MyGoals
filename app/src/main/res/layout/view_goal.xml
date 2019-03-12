@@ -1,65 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/goalLayout"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="5dp"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="10dp"    >
 
-    <include layout="@layout/guideline" />
-
-    <View
+    <android.support.constraint.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/goalLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:background="@drawable/goal_view_bg" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/goalTitle"
-        android:layout_width="@dimen/empty"
-        android:layout_height="@dimen/empty"
-        android:gravity="center_vertical"
-        tools:text="eTutor sdflsdjflasjdfl   dksflasdfj l adflkjsalfj lksdjflsdsflaj lkdsfj  dlksf"
-        android:ellipsize="end"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_30"
-        app:layout_constraintLeft_toRightOf="@id/guideline_vertical_05"
-        app:layout_constraintRight_toLeftOf="@id/goalAddButton"
-        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_10" />
+        <include layout="@layout/guideline" />
+
+        <TextView
+            android:id="@+id/goalTitle"
+            android:layout_width="@dimen/empty"
+            android:layout_height="@dimen/empty"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_30"
+            app:layout_constraintLeft_toRightOf="@id/guideline_vertical_05"
+            app:layout_constraintRight_toLeftOf="@id/goalAddButton"
+            app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_10"
+            tools:text="eTutor sdflsdjflasjdfl   dksflasdfj l adflkjsalfj lksdjflsdsflaj lkdsfj  dlksf" />
 
 
-    <TextView
-        android:id="@+id/createDate"
-        android:layout_width="@dimen/empty"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:gravity="center_vertical"
-        tools:text="13.01.2019"
-        android:textSize="8dp"
-        app:layout_constraintTop_toBottomOf="@id/goalTitle"
-        app:layout_constraintLeft_toRightOf="@id/guideline_vertical_05" />
+        <TextView
+            android:id="@+id/createDate"
+            android:layout_width="@dimen/empty"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical"
+            android:textSize="8dp"
+            app:layout_constraintLeft_toRightOf="@id/guideline_vertical_05"
+            app:layout_constraintTop_toBottomOf="@id/goalTitle"
+            tools:text="13.01.2019" />
 
-    <ImageView
-        android:id="@+id/goalAddButton"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/empty"
-        android:layout_margin="5dp"
-        android:src="@drawable/ic_add"
-        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_50"
-        app:layout_constraintRight_toLeftOf="@id/guideline_vertical_95"
-        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_05" />
+        <ImageView
+            android:id="@+id/goalAddButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/empty"
+            android:layout_margin="5dp"
+            android:src="@drawable/ic_add"
+            app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_50"
+            app:layout_constraintRight_toLeftOf="@id/goalSettingButton"
+            app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_05" />
 
-    <pl.maniak.mygoals.utils.views.GoalProgress
-        android:id="@+id/goalProgress"
-        android:layout_width="@dimen/empty"
-        android:layout_height="@dimen/empty"
-        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_95"
-        app:layout_constraintLeft_toRightOf="@id/guideline_vertical_05"
-        app:layout_constraintRight_toLeftOf="@id/guideline_vertical_95"
-        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_50" />
+        <ImageView
+            android:id="@+id/goalSettingButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/empty"
+            android:layout_margin="5dp"
+            android:src="@drawable/ic_settings"
+            app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_50"
+            app:layout_constraintRight_toLeftOf="@id/guideline_vertical_95"
+            app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_05" />
 
-</android.support.constraint.ConstraintLayout>
+        <pl.maniak.mygoals.utils.views.GoalProgress
+            android:id="@+id/goalProgress"
+            android:layout_width="@dimen/empty"
+            android:layout_height="@dimen/empty"
+            app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_95"
+            app:layout_constraintLeft_toRightOf="@id/guideline_vertical_05"
+            app:layout_constraintRight_toLeftOf="@id/guideline_vertical_95"
+            app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_50" />
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>

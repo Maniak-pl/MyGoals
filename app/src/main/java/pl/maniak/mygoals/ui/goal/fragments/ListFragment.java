@@ -81,7 +81,7 @@ public class ListFragment extends BaseFragment implements ListContract.View, Lis
 
     private void initRecyclerView() {
         recyclerView.setLayoutManager(layoutManager);
-        adapter.setClickListener(new GoalsAdapter.OnItemClickListener() {
+        adapter.setSettingClickListener(new GoalsAdapter.OnItemClickListener() {
             @Override
             public void onItemClicked(Goal goal) {
                 presenter.onItemClicked(goal);
