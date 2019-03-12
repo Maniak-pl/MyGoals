@@ -25,9 +25,6 @@ public class GoalActivity extends BaseActivity implements GoalContract.View, Goa
     @BindView(R.id.navigation)
     BottomNavigationView navigation;
 
-    @BindView(R.id.fab)
-    FloatingActionButton fab;
-
     @Inject
     ListFragment listFragment;
 
@@ -43,12 +40,6 @@ public class GoalActivity extends BaseActivity implements GoalContract.View, Goa
         presenter.attachView(this);
         presenter.attachRouter(this);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.onMenuButtonClicked();
-            }
-        });
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {

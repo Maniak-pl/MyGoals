@@ -30,11 +30,6 @@ public class GoalPresenter implements GoalContract.Presenter {
     }
 
     @Override
-    public void onMenuButtonClicked() {
-        navigationToEditGoal(null);
-    }
-
-    @Override
     public void onListNavigationItemSelected() {
         if (view != null) {
             view.showGoalsFragment();

@@ -14,7 +14,6 @@ public interface GoalContract {
     }
 
     interface Presenter extends BaseContract.Presenter<View, Router> {
-        void onMenuButtonClicked();
         void onListNavigationItemSelected();
         void onHistoryNavigationItemSelected();
     }

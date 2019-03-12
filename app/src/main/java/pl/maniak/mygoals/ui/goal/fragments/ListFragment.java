@@ -3,8 +3,10 @@ package pl.maniak.mygoals.ui.goal.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import java.util.List;
 
@@ -25,6 +27,9 @@ public class ListFragment extends BaseFragment implements ListContract.View, Lis
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
 
     @Inject
     ListContract.Presenter presenter;
@@ -59,6 +64,13 @@ public class ListFragment extends BaseFragment implements ListContract.View, Lis
     protected void init() {
         presenter.attachView(this);
         presenter.attachRouter(this);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.onMenuButtonClicked();
+            }
+        });
     }
 
     @Override
@@ -82,6 +94,20 @@ public class ListFragment extends BaseFragment implements ListContract.View, Lis
             }
         });
         recyclerView.setAdapter(adapter);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener(){
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy){
+                if (dy<0 && !fab.isShown())
+                    fab.show();
+                else if(dy>0 && fab.isShown())
+                    fab.hide();
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+        });
     }
 
     @Override

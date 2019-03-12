@@ -14,6 +14,6 @@
     <color name="gray">#6c6c6c</color>
 
     <color name="transparent">#00000000</color>
-    <color name="light_grey">#bababa</color>
+    <color name="light_gray">#bababa</color>
     <color name="layout_bg">#dce2e8</color>
 </resources>

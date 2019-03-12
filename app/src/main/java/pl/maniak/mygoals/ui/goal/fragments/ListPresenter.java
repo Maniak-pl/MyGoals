@@ -73,4 +73,9 @@ public class ListPresenter implements ListContract.Presenter {
             router.navigationToEditGoal(goalId);
         }
     }
+
+    @Override
+    public void onMenuButtonClicked() {
+        navigationToEditGoal(null);
+    }
 }
